@@ -1,0 +1,50 @@
+#include<iostream>
+#include<vector>
+#include<list>
+using namespace std;
+
+const int TABLE_SIZE = 10;
+
+class HashTable {
+private:
+vector<list<int>> table;
+
+int hashFunction(int key) {
+    return key % TABLE_SIZE;
+}
+
+public:
+HashTable() {
+    table.resize(TABLE_SIZE);// menginisialisasi tabel hash dengan ukuran TABLE_SIZE
+}
+
+void insert(int key) {
+    int index = hashFunction(key);// menghitung index
+    table[index].push_back(key);// menambahkan key ke dalam list di index yang sesuai
+}
+
+void display() {
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        cout << i << " ";
+        
+        for (int data : table[i]) {
+            cout << data << " -> ";
+        }
+        cout << "nullptr" << endl;
+    }
+}
+
+};
+
+int main() {
+    HashTable ht;
+
+    ht.insert(23);
+    ht.insert(43);
+    ht.insert(13);
+    ht.insert(35);
+
+    ht.display();
+
+    return 0;
+}
